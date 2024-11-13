@@ -59,7 +59,7 @@ initializeDBandServer();
 // API: Register New User
 app.post("/signup/", async (request, response) => {
   const { username, password } = request.body;
-  console.log(username, password);
+  // console.log(username, password);
   const userCheckQuery = `
     SELECT * FROM user WHERE username = ?;`;
   const dbUser = await db.get(userCheckQuery, [username]);
@@ -125,25 +125,6 @@ app.post("/login/", async (request, response) => {
     }
   }
 });
-
-// API: Create a new task
-// app.post("/todos", authenticateToken, async (request, response) => {
-//   const { task_description, status } = request.body;
-//   const { username } = request.headers;
-
-//   const getUserQuery = `SELECT user_id FROM user WHERE username = ?;`;
-//   const dbUser = await db.get(getUserQuery, [username]);
-//   const { user_id } = dbUser;
-
-//   const createTaskQuery = `
-//     INSERT INTO
-//       todo (user_id, task_description, status)
-//     VALUES
-//       (?, ?, ?);
-//   `;
-//   await db.run(createTaskQuery, [user_id, task_description, status]);
-//   response.send("Task Created Successfully");
-// });
 
 // API: Create a new task
 app.post("/todos", authenticateToken, async (request, response) => {
